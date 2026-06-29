@@ -29,7 +29,18 @@ def author_stats(books):
     pass
 
 def delete_book(books):
-    pass
+    if not books:
+        print("Список книг пуст")
+        return
+    for i, b in enumerate(books, 1):
+        print(f"{i}. {b['author']} - {b['title']}")
+    raw = input("Номер книги для удаления: ").strip()
+    if raw.isdigit() and 1 <= int(raw) <= len(books):
+        removed = books.pop(int(raw) - 1)
+        save_books(books)
+        print(f"Удалена книга: {removed['title']}")
+    else:
+        print("Неверный номер")
 
 def main():
     books = load_books()
