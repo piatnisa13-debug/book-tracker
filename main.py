@@ -20,13 +20,30 @@ def add_book(books):
     pass
 
 def list_books(books):
-    pass
+    if not books:
+        print("Список книг пуст")
+        return
+    for i, b in enumerate(books, 1):
+        print(f"{i}. {b['author']} - {b['title']} "
+              f"(оценка: {b['rating']}, прочитано: {b['date']})")
 
 def average_rating(books):
-    pass
+    if not books:
+        print("Нет книг для расчёта")
+        return
+    avg = sum(b["rating"] for b in books) / len(books)
+    print(f"Средняя оценка: {avg:.2f}")
 
 def author_stats(books):
-    pass
+    if not books:
+        print("Нет данных")
+        return
+    stats = {}
+    for b in books:
+        stats[b["author"]] = stats.get(b["author"], 0) + 1
+    print("Статистика по авторам:")
+    for author, count in sorted(stats.items()):
+        print(f"  {author}: {count}")
 
 def delete_book(books):
     pass
