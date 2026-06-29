@@ -17,7 +17,22 @@ def save_books(books):
         json.dump(books, f, ensure_ascii=False, indent=2)
 
 def add_book(books):
-    pass
+    author = input("Автор: ").strip()
+    title = input("Название: ").strip()
+    for b in books:
+        if b["author"].lower() == author.lower() and b["title"].lower() == title.lower():
+            print("Такая книга уже есть в списке!")
+            return
+    while True:
+        raw = input("Оценка (1-5): ").strip()
+        if raw.isdigit() and 1 <= int(raw) <= 5:
+            rating = int(raw)
+            break
+        print("Нужно целое число от 1 до 5")
+    date = input("Дата прочтения (например 2026-06-29): ").strip()
+    books.append({"author": author, "title": title, "rating": rating, "date": date})
+    save_books(books)
+    print("Книга добавлена!")
 
 def list_books(books):
     pass
